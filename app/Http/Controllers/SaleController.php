@@ -25,7 +25,11 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
-        $maxImages = Setting::where('name', 'maxImages')->value('maxImages');
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para crear un anuncio.');
+        }
+        $maxImages = Setting::where('name', 'maxImages')->value('maxImages')?? 5;
+        
         $request->validate([
             'product' => 'required|string|max:255',
             'description' => 'required|string',
@@ -73,7 +77,7 @@ class SaleController extends Controller
     public function update(Request $request, $id)
     {
         $sale = Sale::findOrFail($id);
-        $maxImages = Setting::where('name', 'maxImages')->value('maxImages');
+        $maxImages = Setting::where('name', 'maxImages')->value('maxImages') ?? 5; 
         $request->validate([
             'product' => 'required|string|max:255',
             'description' => 'required|string',

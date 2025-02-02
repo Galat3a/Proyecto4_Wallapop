@@ -21,7 +21,7 @@
                                     <h5 class="card-title">{{ $sale->product }}</h5>
                                     <p class="card-text">
                                         <strong>Precio:</strong> ${{ number_format($sale->price, 2) }} <br>
-                                        <strong>Categoría:</strong> {{ $sale->category->name }}
+                                        <strong>Categoría:</strong> {{ $sale->categoria->name }}
                                     </p>
                                     <a href="{{ route('sales.show', $sale->id) }}" class="btn btn-primary btn-block">Ver más</a>
                                 </div>
